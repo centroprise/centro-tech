@@ -1,0 +1,20 @@
+{
+  "name": "@centro-tech/utils",
+  "version": "1.0.0",
+  "description": "Utilities provided by CentroPrise",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/centroprise/centro-tech.git"
+  },
+  "author": "centrotech",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/centroprise/centro-tech/issues"
+  },
+  "homepage": "https://github.com/centroprise/centro-tech#readme"
+}
