@@ -1,6 +1,6 @@
 {
   "name": "@centro-tech/utils",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Utilities provided by CentroPrise",
   "main": "index.js",
   "type": "module",
