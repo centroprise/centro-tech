@@ -1,0 +1,27 @@
+{
+  "name": "@centro-tech/components",
+  "version": "1.0.0",
+  "description": "Components provided by Centro Tech",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/centroprise/centro-tech.git"
+  },
+  "peerDependencies": {
+    "react": "^19.0.0 || ^18.0.0",
+    "react-dom": "^19.0.0 || ^18.0.0"
+  },
+  "author": "centrotech",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/centroprise/centro-tech/issues"
+  },
+  "homepage": "https://github.com/centroprise/centro-tech#readme"
+}

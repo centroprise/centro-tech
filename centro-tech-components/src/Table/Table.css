@@ -1,0 +1,15 @@
+.centro-table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 16px 0;
+}
+
+.centro-table th, .centro-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.centro-table th {
+  background-color: #0055ff;
+  color: white;
+}
