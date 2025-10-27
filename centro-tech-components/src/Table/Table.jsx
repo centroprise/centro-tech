@@ -4,7 +4,7 @@ import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 import "./Table.css";
 
-const CentroTable = ({ dataSource, data, allowPagination = true }) => {
+const CentroTable = ({ dataSource, data, allowPagination = true, enableFilters = false }) => {
   const [tableData, setTableData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [filters, setFilters] = useState({});
@@ -26,8 +26,14 @@ const CentroTable = ({ dataSource, data, allowPagination = true }) => {
 
   const columns = tableData.length > 0 ? Object.keys(tableData[0]) : [];
 
-  // Initialize filters if empty
+  // Initialize filters if empty and filters are enabled
   useEffect(() => {
+    if (!enableFilters) {
+      // clear any existing filters when filtering is disabled
+      if (Object.keys(filters).length !== 0) setFilters({});
+      return;
+    }
+
     if (columns.length && Object.keys(filters).length === 0) {
       const initFilters = {};
       columns.forEach((col) => {
@@ -35,7 +41,7 @@ const CentroTable = ({ dataSource, data, allowPagination = true }) => {
       });
       setFilters(initFilters);
     }
-  }, [columns, filters]);
+  }, [columns, enableFilters]);
 
   return (
     <DataTable
@@ -44,12 +50,12 @@ const CentroTable = ({ dataSource, data, allowPagination = true }) => {
       paginator={allowPagination}
       rows={10}
       emptyMessage="No data found"
-      filters={filters}
-      onFilter={(e) => setFilters(e.filters)}
-      filterDisplay="row"
+      filters={enableFilters ? filters : undefined}
+      onFilter={enableFilters ? (e) => setFilters(e.filters) : undefined}
+      filterDisplay={enableFilters ? "row" : undefined}
     >
       {columns.map((col) => (
-        <Column key={col} field={col} header={col} sortable filter />
+        <Column key={col} field={col} header={col} sortable filter={enableFilters} />
       ))}
     </DataTable>
   );
@@ -59,6 +65,7 @@ CentroTable.propTypes = {
   dataSource: PropTypes.string,
   data: PropTypes.array,
   allowPagination: PropTypes.bool,
+  enableFilters: PropTypes.bool,
 };
 
 export default CentroTable;
