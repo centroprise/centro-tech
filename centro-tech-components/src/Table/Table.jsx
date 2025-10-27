@@ -1,30 +1,64 @@
-import './Table.css';
+import { useState, useEffect } from "react";
+import PropTypes from "prop-types";
+import { DataTable } from "primereact/datatable";
+import { Column } from "primereact/column";
+import "./Table.css";
 
-const Table = ({ data }) => {
-  if (!data || data.length === 0) return <p>No data available</p>;
+const CentroTable = ({ dataSource, data, allowPagination = true }) => {
+  const [tableData, setTableData] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [filters, setFilters] = useState({});
 
-  const headers = Object.keys(data[0]);
+  useEffect(() => {
+    if (!dataSource) {
+      setTableData(data || []);
+      return;
+    }
+
+    setLoading(true);
+
+    fetch(dataSource) 
+      .then((response) => response.json())
+      .then((json) => setTableData(json))
+      .catch((err) => console.error("Error fetching data:", err))
+      .finally(() => setLoading(false));
+  }, [dataSource, data]);
+
+  const columns = tableData.length > 0 ? Object.keys(tableData[0]) : [];
+
+  // Initialize filters if empty
+  useEffect(() => {
+    if (columns.length && Object.keys(filters).length === 0) {
+      const initFilters = {};
+      columns.forEach((col) => {
+        initFilters[col] = { value: null, matchMode: "contains" };
+      });
+      setFilters(initFilters);
+    }
+  }, [columns, filters]);
 
   return (
-    <table className="centro-table">
-      <thead>
-        <tr>
-          {headers.map(header => (
-            <th key={header}>{header}</th>
-          ))}
-        </tr>
-      </thead>
-      <tbody>
-        {data.map((row, i) => (
-          <tr key={i}>
-            {headers.map(header => (
-              <td key={header}>{row[header]}</td>
-            ))}
-          </tr>
-        ))}
-      </tbody>
-    </table>
+    <DataTable
+      value={tableData}
+      loading={loading}
+      paginator={allowPagination}
+      rows={10}
+      emptyMessage="No data found"
+      filters={filters}
+      onFilter={(e) => setFilters(e.filters)}
+      filterDisplay="row"
+    >
+      {columns.map((col) => (
+        <Column key={col} field={col} header={col} sortable filter />
+      ))}
+    </DataTable>
   );
 };
 
-export default Table;
+CentroTable.propTypes = {
+  dataSource: PropTypes.string,
+  data: PropTypes.array,
+  allowPagination: PropTypes.bool,
+};
+
+export default CentroTable;

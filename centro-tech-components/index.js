@@ -1,1 +1,1 @@
-export { default as Table } from './src/Table/Table.jsx';
+export { default as CentroTable } from './src/Table/Table.jsx';

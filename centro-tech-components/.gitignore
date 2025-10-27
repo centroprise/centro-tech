@@ -1,0 +1,8 @@
+# Dependencies
+/node_modules
+package-lock.json
+
+# IDE files (optional but commonly ignored)
+.DS_Store
+.idea/
+.vscode/
