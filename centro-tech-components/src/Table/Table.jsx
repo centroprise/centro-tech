@@ -49,8 +49,11 @@ const CentroTable = ({
 
   // Default
   const defaultBodyTemplate = (rowData, field) => {
-    return rowData[field];
+    const value = rowData[field];
+    if (typeof value === "object" && value !== null) return JSON.stringify(value);
+    return value;
   };
+
 
   // Render each column based on its configuration
   const renderColumn = (col, index) => {
@@ -58,12 +61,14 @@ const CentroTable = ({
     let bodyTemplate = null;
 
     if (col.body) {
-      bodyTemplate = (rowData) => col.body(rowData);
+      bodyTemplate = (rowData) => {
+        const result = col.body(rowData);
+        return typeof result === "function" ? <result /> : result;
+      };
     } else if (col.type === "tag") {
       bodyTemplate = (rowData) => {
         const value = rowData[col.field];
-        const color =
-          col.tagColors?.[value] || col.defaultColor || "info";
+        const color = col.tagColors?.[value] || col.defaultColor || "info";
         return <Tag value={value} severity={color} />;
       }
     } else {
@@ -109,14 +114,14 @@ CentroTable.propTypes = {
   // Column definitions - array of column objects
   columns: PropTypes.arrayOf(
     PropTypes.shape({
-      field: PropTypes.string.isRequired,     
-      header: PropTypes.string,                
-      sortable: PropTypes.bool,                
-      filter: PropTypes.bool,                  
-      style: PropTypes.object,                 
-      type: PropTypes.oneOf(["text", "tag"]), 
+      field: PropTypes.string.isRequired,
+      header: PropTypes.string,
+      sortable: PropTypes.bool,
+      filter: PropTypes.bool,
+      style: PropTypes.object,
+      type: PropTypes.oneOf(["text", "tag"]),
 
-      tagColors: PropTypes.object,  
+      tagColors: PropTypes.object,
       defaultColor: PropTypes.string,
 
       body: PropTypes.func,

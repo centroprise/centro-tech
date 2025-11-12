@@ -1,11 +1,15 @@
 {
   "name": "@centro-tech/components",
-  "version": "1.0.0",
+  "version": "1.0.5",
   "description": "Components provided by Centro Tech",
   "type": "module",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "types": "index.d.ts",
+  "files": ["dist"],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "babel src --out-dir dist --extensions \".js,.jsx\" --copy-files",
+    "prepare": "npm run build"
   },
   "publishConfig": {
     "access": "public"
@@ -25,5 +29,11 @@
   "bugs": {
     "url": "https://github.com/centroprise/centro-tech/issues"
   },
-  "homepage": "https://github.com/centroprise/centro-tech#readme"
+  "homepage": "https://github.com/centroprise/centro-tech#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.28.3",
+    "@babel/core": "^7.28.5",
+    "@babel/preset-env": "^7.28.5",
+    "@babel/preset-react": "^7.28.5"
+  }
 }
