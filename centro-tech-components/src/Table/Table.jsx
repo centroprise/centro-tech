@@ -1,9 +1,9 @@
+import React from "react";
 import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 import { Tag } from "primereact/tag";
-import "./Table.css";
 
 const CentroTable = ({
   dataSource,

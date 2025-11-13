@@ -1,39 +1,41 @@
 {
   "name": "@centro-tech/components",
-  "version": "1.0.5",
+  "version": "1.0.10",
   "description": "Components provided by Centro Tech",
-  "type": "module",
   "main": "dist/index.js",
-  "types": "index.d.ts",
-  "files": ["dist"],
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "babel src --out-dir dist --extensions \".js,.jsx\" --copy-files",
+    "build": "babel src --out-dir dist --extensions \".js,.jsx\" --copy-files && npm run build:types",
+    "build:types": "cp index.d.ts dist/index.d.ts",
     "prepare": "npm run build"
   },
   "publishConfig": {
     "access": "public"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/centroprise/centro-tech.git"
-  },
   "peerDependencies": {
     "primeicons": "^7.0.0",
     "primereact": "^10.0.0",
-    "react": "^19.0.0 || ^18.0.0",
-    "react-dom": "^19.0.0 || ^18.0.0"
+    "react": "^18.0.0 || ^19.0.0",
+    "react-dom": "^18.0.0 || ^19.0.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.28.3",
+    "@babel/core": "^7.28.5",
+    "@babel/preset-env": "^7.28.5",
+    "@babel/preset-react": "^7.28.5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/centroprise/centro-tech.git"
   },
   "author": "centrotech",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/centroprise/centro-tech/issues"
   },
-  "homepage": "https://github.com/centroprise/centro-tech#readme",
-  "devDependencies": {
-    "@babel/cli": "^7.28.3",
-    "@babel/core": "^7.28.5",
-    "@babel/preset-env": "^7.28.5",
-    "@babel/preset-react": "^7.28.5"
-  }
+  "homepage": "https://github.com/centroprise/centro-tech#readme"
 }

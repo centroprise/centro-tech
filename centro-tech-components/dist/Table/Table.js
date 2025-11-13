@@ -4,13 +4,13 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports["default"] = void 0;
-var _react = require("react");
+var _react = _interopRequireWildcard(require("react"));
 var _propTypes = _interopRequireDefault(require("prop-types"));
 var _datatable = require("primereact/datatable");
 var _column = require("primereact/column");
 var _tag = require("primereact/tag");
-require("./Table.css");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { "default": e }; }
+function _interopRequireWildcard(e, t) { if ("function" == typeof WeakMap) var r = new WeakMap(), n = new WeakMap(); return (_interopRequireWildcard = function _interopRequireWildcard(e, t) { if (!t && e && e.__esModule) return e; var o, i, f = { __proto__: null, "default": e }; if (null === e || "object" != _typeof(e) && "function" != typeof e) return f; if (o = t ? n : r) { if (o.has(e)) return o.get(e); o.set(e, f); } for (var _t in e) "default" !== _t && {}.hasOwnProperty.call(e, _t) && ((i = (o = Object.defineProperty) && Object.getOwnPropertyDescriptor(e, _t)) && (i.get || i.set) ? o(f, _t, i) : f[_t] = e[_t]); return f; })(e, t); }
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -89,14 +89,14 @@ var CentroTable = function CentroTable(_ref) {
     if (col.body) {
       bodyTemplate = function bodyTemplate(rowData) {
         var result = col.body(rowData);
-        return typeof result === "function" ? /*#__PURE__*/React.createElement("result", null) : result;
+        return typeof result === "function" ? /*#__PURE__*/_react["default"].createElement("result", null) : result;
       };
     } else if (col.type === "tag") {
       bodyTemplate = function bodyTemplate(rowData) {
         var _col$tagColors;
         var value = rowData[col.field];
         var color = ((_col$tagColors = col.tagColors) === null || _col$tagColors === void 0 ? void 0 : _col$tagColors[value]) || col.defaultColor || "info";
-        return /*#__PURE__*/React.createElement(_tag.Tag, {
+        return /*#__PURE__*/_react["default"].createElement(_tag.Tag, {
           value: value,
           severity: color
         });
@@ -107,7 +107,7 @@ var CentroTable = function CentroTable(_ref) {
         return defaultBodyTemplate(rowData, col.field);
       };
     }
-    return /*#__PURE__*/React.createElement(_column.Column, {
+    return /*#__PURE__*/_react["default"].createElement(_column.Column, {
       key: col.field || index,
       field: col.field,
       header: col.header || col.field,
@@ -117,7 +117,7 @@ var CentroTable = function CentroTable(_ref) {
       body: bodyTemplate
     });
   };
-  return /*#__PURE__*/React.createElement(_datatable.DataTable, {
+  return /*#__PURE__*/_react["default"].createElement(_datatable.DataTable, {
     value: tableData,
     loading: loading,
     paginator: allowPagination,
